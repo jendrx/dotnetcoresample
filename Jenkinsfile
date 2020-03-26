@@ -12,6 +12,7 @@ pipeline {
         steps{
           echo 'Testing'
           sh "docker build --target unittest --tag dotnettest --file Board/Dockerfile ."
+          sh "docker run dotnettest dotnet test"
         }
       }
    }
