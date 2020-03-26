@@ -7,10 +7,15 @@ FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
 COPY ["Board/Board.csproj", "Board/"]
 COPY ["UtilLib/UtilLib.csproj", "UtilLib/"]
+COPY ["UtilLib.Test/UtilLib.Test.csproj", "UtilLib.Test/"]
 RUN dotnet restore "Board/Board.csproj"
+RUN dotnet restore ""UtilLib.Test/UtilLib.Test.csproj""
 COPY . .
 WORKDIR "/src/Board"
 RUN dotnet build "Board.csproj" -c Release -o /app/build
+
+FROM build as unittest
+WORKDIR "/src/UtilLib.Test" 
 
 FROM build AS publish
 RUN dotnet publish "Board.csproj" -c Release -o /app/publish
