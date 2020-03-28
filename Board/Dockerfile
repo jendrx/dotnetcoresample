@@ -8,14 +8,19 @@ WORKDIR /src
 COPY ["Board/Board.csproj", "Board/"]
 COPY ["UtilLib/UtilLib.csproj", "UtilLib/"]
 COPY ["UtilLib.Test/UtilLib.Test.csproj", "UtilLib.Test/"]
+COPY ["UtilLib.FTest/UtilLib.FTest.csproj", "UtilLib.FTest/"]
 RUN dotnet restore "Board/Board.csproj"
-RUN dotnet restore ""UtilLib.Test/UtilLib.Test.csproj""
+RUN dotnet restore "UtilLib.Test/UtilLib.Test.csproj"
+RUN dotnet restore "UtilLib.Test/UtilLib.FTest.csproj"
 COPY . .
 WORKDIR "/src/Board"
 RUN dotnet build "Board.csproj" -c Release -o /app/build
 
 FROM build as unittest
 WORKDIR "/src/UtilLib.Test" 
+
+FROM build as ftest
+WORKDIR "/src/UtilLib.FTest"
 
 FROM build AS publish
 RUN dotnet publish "Board.csproj" -c Release -o /app/publish
