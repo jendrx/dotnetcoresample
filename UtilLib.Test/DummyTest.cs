@@ -9,5 +9,11 @@ namespace UtilLib.Test
         {
             Assert.Equal(2, MathUtil.Sum(1, 1));
         }
+
+        [Fact]
+        public void TestAnotherSum()
+        {
+            Assert.Equal(3, MathUtil.Sum(1, 1));
+        }
     }
 }
