@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  board-unittest:
+    image: board-unitest
+    command: bash -c "dotnet test --logger \"trx;LogFileName=/tests/board-unit-test-results.xml\" && chmod a+wr -R /tests"
+    build:
+      context: .
+      dockerfile: Board/Dockerfile
+      target: unittest
+    volumes:
+      - ${BUILD_ARTIFACTSTAGINGDIRECTORY:-./tests-results/}:/tests
+
+  board-ftest:
+    image: board-ftest
+    command: bash -c "dotnet test --logger \"trx;LogFileName=/tests/board-ftest-results.xml\" && chmod a+wr -R /tests"
+    build:
+      context: .
+      dockerfile: Board/Dockerfile
+      target: ftest
+    volumes:
+      - ${BUILD_ARTIFACTSTAGINGDIRECTORY:-./tests-results/}:/tests
