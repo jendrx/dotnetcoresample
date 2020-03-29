@@ -11,7 +11,7 @@ COPY ["UtilLib.Test/UtilLib.Test.csproj", "UtilLib.Test/"]
 COPY ["UtilLib.FTest/UtilLib.FTest.csproj", "UtilLib.FTest/"]
 RUN dotnet restore "Board/Board.csproj"
 RUN dotnet restore "UtilLib.Test/UtilLib.Test.csproj"
-RUN dotnet restore "UtilLib.Test/UtilLib.FTest.csproj"
+RUN dotnet restore "UtilLib.FTest/UtilLib.FTest.csproj"
 COPY . .
 WORKDIR "/src/Board"
 RUN dotnet build "Board.csproj" -c Release -o /app/build
