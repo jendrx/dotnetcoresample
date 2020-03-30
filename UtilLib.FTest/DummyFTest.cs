@@ -10,5 +10,11 @@ namespace UtilLib.FTest
         {
             Assert.Equal(1, 1);
         }
+        
+        [Fact]
+        public void FailTest()
+        {
+            Assert.True(false);
+        }
     }
 }
