@@ -3,7 +3,7 @@ version: '3.4'
 services:
   board-unittest:
     image: board-unitest
-    command: bash -c "dotnet test --logger \"trx;LogFileName=/tests/board-unit-test-results.xml\" && chmod a+wr -R /tests"
+    command: bash -c "dotnet test --logger trx --collect:\"XPLAT Code Coverage\" --results-directory:/tests && chmod a+wr -R /tests"
     build:
       context: .
       dockerfile: Board/Dockerfile
@@ -13,7 +13,7 @@ services:
 
   board-ftest:
     image: board-ftest
-    command: bash -c "dotnet test --logger \"trx;LogFileName=/tests/board-ftest-results.xml\" && chmod a+wr -R /tests"
+    command: bash -c "dotnet test --logger trx --collect:\"XPLAT Code Coverage\" --results-directory:/tests && chmod a+wr -R /tests"
     build:
       context: .
       dockerfile: Board/Dockerfile
